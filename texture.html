@@ -27,12 +27,12 @@ var init = function() {
 
    // テクスチャー読み込み
    var textureLoader = new THREE.TextureLoader();  
-  var texture = textureLoader.load("grass.jpg");
+  var texture = textureLoader.load("niku.jpg");
   var mat = new THREE.MeshPhongMaterial();
   mat.map = texture;
   
   // バンプマップ読み込み
-  var bump = textureLoader.load("grass-bump.jpg");
+  var bump = textureLoader.load("niku-bump.jpg");
   mat.bumpMap = bump;
   mat.bumpscale = 0.2;
 
