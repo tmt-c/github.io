@@ -27,12 +27,12 @@ var init = function() {
 
    // テクスチャー読み込み
    var textureLoader = new THREE.TextureLoader();  
-  var texture = textureLoader.load("niku.jpg");
+  var texture = textureLoader.load("grass.jpg");
   var mat = new THREE.MeshPhongMaterial();
   mat.map = texture;
   
   // バンプマップ読み込み
-  var bump = textureLoader.load("niku-bump.jpg");
+  var bump = textureLoader.load("grass-bump.jpg");
   mat.bumpMap = bump;
   mat.bumpscale = 0.2;
 
@@ -60,7 +60,7 @@ var init = function() {
     requestAnimationFrame(update);
 
     // 箱を回転させる
-    box.rotation.x += 0.01;
+    /box.rotation.x += 0.01;
     box.rotation.y += 0.01;
 
     renderer.render(scene, camera);
