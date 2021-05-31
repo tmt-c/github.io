@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>ƒRƒ“ƒsƒ…[ƒ^ƒOƒ‰ƒtƒBƒbƒNƒX@‰Û‘è‚Q</title>
+<title>ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã€€èª²é¡Œï¼’</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
 
 </head>
@@ -14,29 +14,29 @@ var init = function() {
     var width = 800,
         height = 600;
   
-    // ƒŒƒ“ƒ_ƒ‰[‚ğì¬
+    // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’ä½œæˆ
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
     document.body.appendChild(renderer.domElement);
   
-    // ƒV[ƒ“‚ğì¬
+    // ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
     var scene = new THREE.Scene();
   
-    // ƒJƒƒ‰‚ğì¬
+    // ã‚«ãƒ¡ãƒ©ã‚’ä½œæˆ
   var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
 
-   // ƒeƒNƒXƒ`ƒƒ[“Ç‚İ‚İ
+   // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼èª­ã¿è¾¼ã¿
    var textureLoader = new THREE.TextureLoader();  
-  var texture = textureLoader.load("stone.jpg");
+  var texture = textureLoader.load("grass.jpg");
   var mat = new THREE.MeshPhongMaterial();
   mat.map = texture;
   
-  // ƒoƒ“ƒvƒ}ƒbƒv“Ç‚İ‚İ
-  var bump = textureLoader.load("stone-bump.jpg");
+  // ãƒãƒ³ãƒ—ãƒãƒƒãƒ—èª­ã¿è¾¼ã¿
+  var bump = textureLoader.load("grass-bump.jpg");
   mat.bumpMap = bump;
   mat.bumpscale = 0.2;
 
-  // ” ‚ğì¬
+  // ç®±ã‚’ä½œæˆ
   var geometry = new THREE.BoxGeometry(1, 1, 1);
   //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
   //var box = new THREE.Mesh(geometry, material);
@@ -44,22 +44,22 @@ var init = function() {
   box.position.z = -5;
   scene.add(box);
 
- // •½sŒõŒ¹1
+ // å¹³è¡Œå…‰æº1
     var directionalLight1 = new THREE.DirectionalLight(0xffffff);
     directionalLight1.position.set(1, 1, 1);
-    // ƒV[ƒ“‚É’Ç‰Á
+    // ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
     scene.add(directionalLight1);
-    // •½sŒõŒ¹2
+    // å¹³è¡Œå…‰æº2
         var directionalLight2 = new THREE.DirectionalLight(0xffffff);
     directionalLight2.position.set(-1, 1, 1);
-    // ƒV[ƒ“‚É’Ç‰Á
+    // ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
     scene.add(directionalLight2);
 
-  // ‰‰ñÀs
+  // åˆå›å®Ÿè¡Œ
   var update = function() {
     requestAnimationFrame(update);
 
-    // ” ‚ğ‰ñ“]‚³‚¹‚é
+    // ç®±ã‚’å›è»¢ã•ã›ã‚‹
     box.rotation.x += 0.01;
     box.rotation.y += 0.01;
 
