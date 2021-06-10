@@ -56,7 +56,10 @@
         plane.position.set( 0, -50, 0 );
         plane.receiveShadow = true;
         scene.add(plane);
-
+        // バンプマップ読み込み
+        var bump = textureLoader.load("img/plane-bump.jpg");
+        mat.bumpMap = bump;
+        mat.bumpscale = 0.2;
         // 建物
         var geometry = new THREE.BoxGeometry(300, 30, 30);
         var material = new THREE.MeshPhongMaterial({ color: 0xd74950 });
