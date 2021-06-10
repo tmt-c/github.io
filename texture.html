@@ -2,81 +2,70 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>ƒRƒ“ƒsƒ…[ƒ^ƒOƒ‰ƒtƒBƒbƒNƒX@‰Û‘è‚R</title>
+<title>ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã€€èª²é¡Œï¼“</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
 <script src="js/controls/OrbitControls.js"></script>
 
 </head>
 <body>
 <script>
-var init = function() {
+// ãƒšãƒ¼ã‚¸ã®èª­ã¿è¾¼ã¿ã‚’å¾…ã¤
+      window.addEventListener('load', init);
 
-  var width = 800,
-      height = 600;
-  
-  // ƒŒƒ“ƒ_ƒ‰[‚ğì¬
-  var renderer = new THREE.WebGLRenderer();
-  renderer.setSize(width, height);
-  document.body.appendChild(renderer.domElement);
-  
-  // ƒV[ƒ“‚ğì¬
-  var scene = new THREE.Scene();
-  
-  // ƒJƒƒ‰‚ğì¬
-  const camera = new THREE.PerspectiveCamera(45, width / height);
-  // ƒJƒƒ‰‚Ì‰ŠúÀ•W‚ğİ’è
-  camera.position.set(0, 0, 1000);
-  // ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰[‚ğì¬
-  const controls = new THREE.OrbitControls(camera,document.body);
+      function init() {
+        // ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
+        const width = 960;
+        const height = 540;
 
-   // ƒeƒNƒXƒ`ƒƒ[“Ç‚İ‚İ
-   var textureLoader = new THREE.TextureLoader();  
-  var texture = textureLoader.load("niku.jpg");
-  var mat = new THREE.MeshPhongMaterial();
-  mat.map = texture;
+        // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’ä½œæˆ
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#myCanvas')
+        });
+        renderer.setSize(width, height);
+
+        // ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
+        const scene = new THREE.Scene();
+
+        // ã‚«ãƒ¡ãƒ©ã‚’ä½œæˆ
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        // ã‚«ãƒ¡ãƒ©ã®åˆæœŸåº§æ¨™ã‚’è¨­å®š
+        camera.position.set(0, 0, 1000);
+
+        // ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’ä½œæˆ
+        const controls = new THREE.OrbitControls(camera,document.body);
   
-  // ƒoƒ“ƒvƒ}ƒbƒv“Ç‚İ‚İ
-  var bump = textureLoader.load("niku-bump.jpg");
-  mat.bumpMap = bump;
-  mat.bumpscale = 0.2;
-
-  // ” ‚ğì¬
-  var geometry = new THREE.BoxGeometry(1, 1, 1);
-  //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-  //var box = new THREE.Mesh(geometry, material);
-  var box = new THREE.Mesh(geometry, mat);
-  box.position.z = -5;
-  scene.add(box);
-
- // •½sŒõŒ¹1
-    var directionalLight1 = new THREE.DirectionalLight(0xffffff);
-    directionalLight1.position.set(1, 1, 1);
-    // ƒV[ƒ“‚É’Ç‰Á
-    scene.add(directionalLight1);
-    // •½sŒõŒ¹2
+        // å¹³è¡Œå…‰æº1
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+        directionalLight1.position.set(100, 100, 100);
+        // ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
+        scene.add(directionalLight1);
+        // å¹³è¡Œå…‰æº2
         var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-    directionalLight2.position.set(-1, 1, 1);
-    // ƒV[ƒ“‚É’Ç‰Á
-    scene.add(directionalLight2);
+        directionalLight2.position.set(-100, 100, 100);
+        // ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
+        scene.add(directionalLight2);
 
-  // ‰‰ñÀs
-  var update = function() {
-    requestAnimationFrame(update);
+        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼èª­ã¿è¾¼ã¿
+        var textureLoader = new THREE.TextureLoader();  
+        var texture = textureLoader.load("img/earth.png");
+        var mat = new THREE.MeshPhongMaterial();
+        mat.map = texture;
 
-    // ” ‚ğ‰ñ“]‚³‚¹‚é
-    box.rotation.x += 0.01;
-    box.rotation.y += 0.01;
+        // åœ°çƒã‚’ä½œæˆ(åŸç‚¹ã«ä½œæˆ)
+        var geometry = new THREE.SphereGeometry(300, 30, 30);
+        var earth = new THREE.Mesh(geometry, mat);
+        scene.add(earth);
 
-    renderer.render(scene, camera);
-  };
-  update();
-  // –ˆƒtƒŒ[ƒ€‚ÉÀs‚³‚ê‚éƒ‹[ƒvƒCƒxƒ“ƒg‚Å‚·
-  function tick() {
-     // ƒŒƒ“ƒ_ƒŠƒ“ƒO
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
-}
+        tick();
+
+        // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹ãƒ«ãƒ¼ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã§ã™
+        function tick() {
+          // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+      }
+    
   window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
