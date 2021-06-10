@@ -1,63 +1,63 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>ƒRƒ“ƒsƒ…[ƒ^ƒOƒ‰ƒtƒBƒbƒNƒX@‰Û‘è‚R</title>
+    <title>ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã€€èª²é¡Œï¼“</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script>
-      // ƒy[ƒW‚Ì“Ç‚İ‚İ‚ğ‘Ò‚Â
+      // ãƒšãƒ¼ã‚¸ã®èª­ã¿è¾¼ã¿ã‚’å¾…ã¤
       window.addEventListener('load', init);
 
       function init() {
-        // ƒTƒCƒY‚ğw’è
+        // ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
         const width = 960;
         const height = 540;
 
-        // ƒŒƒ“ƒ_ƒ‰[‚ğì¬
+        // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’ä½œæˆ
         const renderer = new THREE.WebGLRenderer({
           canvas: document.querySelector('#myCanvas')
         });
         renderer.setSize(width, height);
 
-        // ƒV[ƒ“‚ğì¬
+        // ã‚·ãƒ¼ãƒ³ã‚’ä½œæˆ
         const scene = new THREE.Scene();
 
-        // ƒJƒƒ‰‚ğì¬
+        // ã‚«ãƒ¡ãƒ©ã‚’ä½œæˆ
         const camera = new THREE.PerspectiveCamera(45, width / height);
-        // ƒJƒƒ‰‚Ì‰ŠúÀ•W‚ğİ’è
+        // ã‚«ãƒ¡ãƒ©ã®åˆæœŸåº§æ¨™ã‚’è¨­å®š
         camera.position.set(0, 0, 1000);
 
-        // ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰[‚ğì¬
+        // ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’ä½œæˆ
         const controls = new THREE.OrbitControls(camera,document.body);
   
-        // •½sŒõŒ¹1@‰©
+        // å¹³è¡Œå…‰æº1ã€€é»„
         var dLight1 = new THREE.DirectionalLight(0xfef988);
         dLight1.position.set(100, 100, 100);
-        // •½sŒõŒ¹2 ò
+        // å¹³è¡Œå…‰æº2 æ©™
         var dLight2 = new THREE.DirectionalLight(0xfed088);
         dLight2.position.set(100, 100, 100);//xyz
 
         scene.add(dLight1);
         scene.add(dLight2);
         
-        // ŠÂ‹«ŒõŒ¹
+        // ç’°å¢ƒå…‰æº
         var light = new THREE.AmbientLight(0xf27b49, 0.3);
         scene.add(light);
 
-        // ƒeƒNƒXƒ`ƒƒ[“Ç‚İ‚İ
+        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼èª­ã¿è¾¼ã¿
         var textureLoader = new THREE.TextureLoader();  
         var texture = textureLoader.load("img/plane.jpg");
         var mat = new THREE.MeshPhongMaterial();
         mat.map = texture;
-        //’n–Ê
-        var geometry = new THREE.PlaneGeometry(700,700);
+        //åœ°é¢
+        var geometry = new THREE.PlaneGeometry(1000,1000);
         var plane = new THREE.Mesh(geometry, mat);
         plane.rotation.set( -Math.PI/2, 0, 0 );
         plane.position.set( 0, -50, 0 );
         plane.receiveShadow = true;
         scene.add(plane);
 
-        // Œš•¨
+        // å»ºç‰©
         var geometry = new THREE.BoxGeometry(300, 30, 30);
         var material = new THREE.MeshPhongMaterial({ color: 0xd74950 });
         var bill = new THREE.Mesh(geometry, material);
@@ -65,9 +65,9 @@
 
         tick();
 
-        // –ˆƒtƒŒ[ƒ€‚ÉÀs‚³‚ê‚éƒ‹[ƒvƒCƒxƒ“ƒg
+        // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹ãƒ«ãƒ¼ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
         function tick() {
-          // ƒŒƒ“ƒ_ƒŠƒ“ƒO
+          // ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
