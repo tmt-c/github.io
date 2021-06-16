@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>ƒRƒ“ƒsƒ…[ƒ^ƒOƒ‰ƒtƒBƒbƒNƒX@‰Û‘è‚R</title>
+<title>ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã€€èª²é¡Œï¼“</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 <script src="OrbitControls.js"></script>
 </head>
@@ -21,7 +21,7 @@ camera.position.set(0, 400, 1500);
 scene.add( camera );
 const controls = new THREE.OrbitControls(camera,document.body);
 
-//ƒeƒNƒXƒ`ƒƒ[Eƒoƒ“ƒvƒ}ƒbƒv“Ç
+//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒ»ãƒãƒ³ãƒ—ãƒãƒƒãƒ—èª­è¾¼
 var textureLoader = new THREE.TextureLoader();  
 var texture = textureLoader.load("img/plane.jpg");
 var mat0 = new THREE.MeshPhongMaterial();
@@ -37,9 +37,9 @@ var bump = textureLoader.load("img/stone-bump.jpg");
 mat1.bumpMap = bump;
 mat1.bumpscale = 0.2;
 
-//ƒrƒ‹
+//ãƒ“ãƒ«
 var textureLoader = new THREE.TextureLoader();  
-var textureS = textureLoader.load("https://1.bp.blogspot.com/-iA2dJIFOvRg/UzALCFEXqwI/AAAAAAAAec4/tXSfCGzAP0I/s400/kumo.png");
+var textureS = textureLoader.load("img/kumo.png");
 const material0 = new THREE.SpriteMaterial({ map: textureS,});
 
 const sprite0 = new THREE.Sprite(material0);
@@ -67,7 +67,7 @@ sprite5.scale.set(300,300,300);
 sprite5.position.set( 900, 400, 900 )
 scene.add(sprite5);
 
-// Î‘œ@‹rE˜rEg‘ÌEñE“ª
+// çŸ³åƒã€€è„šãƒ»è…•ãƒ»èº«ä½“ãƒ»é¦–ãƒ»é ­
 var geometry = new THREE.CylinderGeometry(20,20,100,15);
 var material = new THREE.MeshLambertMaterial({ color: 0xd8d3cb });
 var legL = new THREE.Mesh(geometry, mat1);
@@ -104,7 +104,7 @@ mountain.castShadow = true;
 scene.add(mountain);
 
 
-//ƒrƒ‹
+//ãƒ“ãƒ«
 var geometry = new THREE.BoxGeometry(400, 200, 100);
 var material = new THREE.MeshPhongMaterial({ color: 0xf0c45c });
 var house1 = new THREE.Mesh(geometry, material);
@@ -112,14 +112,14 @@ var house2 = new THREE.Mesh(geometry, material);
 house1.castShadow = true;house2.castShadow = true;
 house1.position.set( -400, 100, -300 );house2.position.set( -400, 100, -450 );
 scene.add(house1);scene.add(house2);
-//•Ç
+//å£
 var geometry = new THREE.BoxGeometry(500, 80, 1);
 var material = new THREE.MeshPhongMaterial({ color: 0xffff22 });
 var wall1 = new THREE.Mesh(geometry, material);
 wall1.position.set( -400, 40, -200 );
 scene.add(wall1);
 
-//ŸƒOƒ‹[ƒv‰»
+//â—†ã‚°ãƒ«ãƒ¼ãƒ—åŒ–
 var stone = new THREE.Object3D();
 stone.add(armL);stone.add(armR);
 stone.add(legL);stone.add(legR);
@@ -136,7 +136,7 @@ all.castShadow = true;
 all.receiveShadow = true;
 scene.add(all);
 
-//’n–Ê
+//åœ°é¢
 var geometry = new THREE.BoxGeometry(2000, 10, 2000);
 //var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
 var plane = new THREE.Mesh(geometry, mat0);
@@ -144,7 +144,7 @@ plane.position.set( 0, 0, 0 );
 plane.receiveShadow = true;
 scene.add(plane);
 
-//•½sŒõŒ¹
+//å¹³è¡Œå…‰æº
 var light1 = new THREE.DirectionalLight(0xffffff);
 light1.position.set(0, 100, 500);
 scene.add(light1);
@@ -153,19 +153,19 @@ var light2 = new THREE.DirectionalLight(0xe29e4f);
 light2.position.set(0, 100, -500);
 scene.add(light2);
 
-//“_ŒõŒ¹ F, Œõ‚Ì‹­‚³, ‹——£, Œõ‚ÌŒ¸Š—¦
+//ç‚¹å…‰æº è‰², å…‰ã®å¼·ã•, è·é›¢, å…‰ã®æ¸›è¡°ç‡
 var lightS = new THREE.SpotLight(0xf9d75a, 1, 50000, 1.0);
 lightS.position.set(0, 800, -1100);
 lightS.castShadow = true;
 lightS.shadow.mapSize.width = 2048*3;
 lightS.shadow.mapSize.height = 2048*3;
 scene.add(lightS);
-// ŠÂ‹«ŒõŒ¹‚ğì¬
-// new THREE.AmbientLight(F, Œõ‚Ì‹­‚³)
+// ç’°å¢ƒå…‰æºã‚’ä½œæˆ
+// new THREE.AmbientLight(è‰², å…‰ã®å¼·ã•)
 //const lightA = new THREE.AmbientLight(0xFFFFFF, 0.2);
 //scene.add(lightA);
 
-//‰‰ñÀs
+//åˆå›å®Ÿè¡Œ
 var update = function() {
     requestAnimationFrame(update);
     renderer.render(scene, camera);
