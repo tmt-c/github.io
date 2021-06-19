@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>コンピュータグラフィックス　課題３</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+<script src="OrbitControls.js"></script>
+</head>
+<body>
+<script>
+var init = function() {
+var width = 960,height = 540;
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(width, height);
+document.body.appendChild(renderer.domElement);
+renderer.shadowMap.enabled = true;
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, width / height);
+camera.position.set(0, 400, 1500);
+scene.add( camera );
+const controls = new THREE.OrbitControls(camera,document.body);
+
+//テクスチャー・バンプマップ読込
+var textureLoader = new THREE.TextureLoader();  
+var texture = textureLoader.load("img/plane.jpg");
+var mat0 = new THREE.MeshPhongMaterial();
+mat0.map = texture;
+var bump = textureLoader.load("img/plane-bump.jpg");
+mat0.bumpMap = bump;
+mat0.bumpscale = 0.2;
+
+var textureLoader = new THREE.TextureLoader();  
+var texture = textureLoader.load("img/stone.jpg");
+var mat1 = new THREE.MeshPhongMaterial();
+mat1.map = texture;
+var bump = textureLoader.load("img/stone-bump.jpg");
+mat1.bumpMap = bump;
+mat1.bumpscale = 0.2;
+
+var textureLoader = new THREE.TextureLoader();  
+var texture = textureLoader.load("img/mountain.jpg");
+var mat2 = new THREE.MeshPhongMaterial();
+mat2.map = texture;
+var bump = textureLoader.load("img/plane-bump.jpg");
+mat2.bumpMap = bump;
+mat2.bumpscale = 0.2;
+
+var textureLoader = new THREE.TextureLoader();  
+var texture = textureLoader.load("img/house.jpg");
+var mat3 = new THREE.MeshPhongMaterial();
+mat3.map = texture;
+
+var textureLoader = new THREE.TextureLoader();  
+var texture = textureLoader.load("img/fence.png");
+var mat4 = new THREE.MeshPhongMaterial();
+mat4.map = texture;
+
+//ビル
+var textureLoader = new THREE.TextureLoader();  
+var textureS = textureLoader.load("img/kumo.png");
+const material0 = new THREE.SpriteMaterial({ map: textureS,});
+
+const sprite0 = new THREE.Sprite(material0);
+sprite0.scale.set(300,300,300);
+sprite0.position.set( 0, 500, -200 )
+scene.add(sprite0);
+const sprite1 = new THREE.Sprite(material0);
+sprite1.scale.set(300,300,300);
+sprite1.position.set( 800, 300, 0 )
+scene.add(sprite1);
+const sprite2 = new THREE.Sprite(material0);
+sprite2.scale.set(300,300,300);
+sprite2.position.set( -500, 200, 400 )
+scene.add(sprite2);
+const sprite3 = new THREE.Sprite(material0);
+sprite3.scale.set(300,300,300);
+sprite3.position.set( -900, 200, 800 )
+scene.add(sprite3);
+const sprite4 = new THREE.Sprite(material0);
+sprite4.scale.set(300,300,300);
+sprite4.position.set( 900, 300, -600 )
+scene.add(sprite4);
+const sprite5 = new THREE.Sprite(material0);
+sprite5.scale.set(300,300,300);
+sprite5.position.set( 900, 400, 900 )
+scene.add(sprite5);
+
+// 石像　脚・腕・身体・首・頭
+var geometry = new THREE.CylinderGeometry(20,20,100,15);
+var material = new THREE.MeshLambertMaterial({ color: 0xd8d3cb });
+var legL = new THREE.Mesh(geometry, mat1);
+var legR = new THREE.Mesh(geometry, mat1);
+legL.position.set( 30, 0, 0 );legR.position.set( -30, 0, 0 );
+legL.castShadow = true;legR.castShadow = true;
+
+var geometry = new THREE.CylinderGeometry(20,20,140,15);
+var armL = new THREE.Mesh(geometry, mat1);
+var armR = new THREE.Mesh(geometry, mat1);
+armL.position.set( 70, 120, 0 );armR.position.set( -70, 210, 0 );
+armL.castShadow = true;armR.castShadow = true;
+
+var geometry = new THREE.CylinderGeometry(50,50,140,60);
+var body = new THREE.Mesh(geometry, mat1);
+body.position.set( 0, 120, 0 );
+body.castShadow = true;
+
+var geometry = new THREE.CylinderGeometry(20,20,40,50);
+var neck = new THREE.Mesh(geometry, mat1);
+neck.position.set( 0, 190, 0 );
+neck.castShadow = true;
+
+var geometry = new THREE.SphereGeometry(40, 32, 32);
+var head = new THREE.Mesh(geometry, mat1);
+head.position.set( 0, 240, 0 );
+head.castShadow = true;
+
+var geometry = new THREE.CylinderGeometry(50,250,200,50);
+var material = new THREE.MeshLambertMaterial({ color: 0xb6e8f5 });
+var mountain = new THREE.Mesh(geometry, mat2);
+mountain.position.set( 500, 100, 700 );
+mountain.castShadow = true;
+scene.add(mountain);
+
+
+//住宅団地
+var geometry = new THREE.BoxGeometry(400, 200, 100);
+const loader = new THREE.TextureLoader();
+const materials = [
+  new THREE.MeshBasicMaterial({map: loader.load('img/house.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('img/house.jpg')}),
+  new THREE.MeshPhongMaterial({ color: 0xc3b6a5 }),
+  new THREE.MeshBasicMaterial({map: loader.load('img/house.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('img/house.jpg')}),
+  new THREE.MeshBasicMaterial({map: loader.load('img/house.jpg')}),
+];
+var house1 = new THREE.Mesh(geometry, materials);
+var house2 = new THREE.Mesh(geometry, materials);
+house1.castShadow = true;house2.castShadow = true;
+house1.position.set( -400, 100, -300 );house2.position.set( -400, 100, -450 );
+scene.add(house1);scene.add(house2);
+//壁
+var geometry = new THREE.BoxGeometry(500, 80, 1);
+var wall1 = new THREE.Mesh(geometry, mat4);
+wall1.position.set( -400, 40, -200 );
+scene.add(wall1);
+
+//風車
+var geometry = new THREE.BoxGeometry(150, 500, 150);
+var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+var wind = new THREE.Mesh(geometry, material);
+wind.position.set( 400, 250, -400 );
+scene.add(wind);
+
+var geometry = new THREE.BoxGeometry(80, 300, 10);
+var material = new THREE.MeshPhongMaterial({ color: 0xd39e6b });
+var wind1 = new THREE.Mesh(geometry, material);
+wind1.position.set( 400, 600, -310 );
+var wind2 = new THREE.Mesh(geometry, material);
+wind2.position.set( 400, 200, -310 );
+var geometry = new THREE.BoxGeometry(300, 80, 10);
+var material = new THREE.MeshPhongMaterial({ color: 0xd39e6b });
+var wind3 = new THREE.Mesh(geometry, material);
+wind3.position.set( 200, 400, -310 );
+var wind4 = new THREE.Mesh(geometry, material);
+wind4.position.set( 600, 400, -310 );
+
+//◆グループ化
+var stone = new THREE.Object3D();
+stone.add(armL);stone.add(armR);
+stone.add(legL);stone.add(legR);
+stone.add(body);
+stone.add(neck);stone.add(head);
+stone.castShadow = true;
+stone.position.set( 0, 100, 0, 0);
+stone.scale.set(2, 2, 2);
+
+var all = new THREE.Object3D();
+all.add(stone);
+all.add(mountain);
+scene.add(all);
+
+var winds = new THREE.Group();
+winds.add(wind1);winds.add(wind2);
+winds.add(wind3);winds.add(wind4);
+scene.add(winds);
+
+winds.position.set( 400, -100, 0);
+winds.rotation.z = 0.8;
+
+// 3Dオブジェクトのワールド座標を取得する
+const worldPosition = winds.getWorldPosition(new THREE.Vector3());
+// スクリーン座標を取得する
+const projection = worldPosition.project(camera);
+const sx = (width / 2) * (+projection.x + 1.0);
+const sy = (height / 2) * (-projection.y + 1.0);
+
+// スクリーン座標
+console.log(sx, sy);
+
+
+//地面
+var geometry = new THREE.BoxGeometry(2000, 10, 2000);
+//var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+var plane = new THREE.Mesh(geometry, mat0);
+plane.position.set( 0, 0, 0 );
+plane.receiveShadow = true;
+scene.add(plane);
+
+//平行光源
+var light1 = new THREE.DirectionalLight(0xffffff);
+light1.position.set(0, 100, 500);
+scene.add(light1);
+
+var light2 = new THREE.DirectionalLight(0xe29e4f);
+light2.position.set(0, 100, -500);
+scene.add(light2);
+
+//点光源 色, 光の強さ, 距離, 光の減衰率
+var lightS = new THREE.SpotLight(0xf9d75a, 1, 50000, 1.0);
+lightS.position.set(0, 800, -1100);
+lightS.castShadow = true;
+lightS.shadow.mapSize.width = 2048*3;
+lightS.shadow.mapSize.height = 2048*3;
+scene.add(lightS);
+// 環境光源を作成
+// new THREE.AmbientLight(色, 光の強さ)
+//const lightA = new THREE.AmbientLight(0xFFFFFF, 0.2);
+//scene.add(lightA);
+
+
+//初回実行
+var update = function() {
+    requestAnimationFrame(update);
+    renderer.render(scene, camera);
+  };
+  update();
+}
+window.addEventListener('DOMContentLoaded', init);
+</script>
+<body>
+</html>
+
