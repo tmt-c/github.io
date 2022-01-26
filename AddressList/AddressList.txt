@@ -1,7 +1,0 @@
---------------------------------------------
-4
-Abe Ichiro super125@ichiro.com
-Koudai Taro taro@chiba.com
-Tanaka Kanata t_kanata@chiba.jp
-Tanaka Kouta t_kouta@chiba.jp
---------------------------------------------
