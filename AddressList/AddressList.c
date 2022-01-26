@@ -5,47 +5,47 @@
 
 #define N 256
 
-//Ÿ’è‹`
+//â—†å®šç¾©
 int Node_Id;
 char Node_Lname[64];
 char Node_Fname[64];
 char Node_Email[64];
 
 int read;
-int total;//ƒŒƒR[ƒh”‹L˜^(countID-countDel)
-int countId;//IDŠÇ—
-int countDel;//íœ‚µ‚½ID‚ÌƒJƒEƒ“ƒg
-int inputD;//íœIDŠi”[
+int total;//ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°è¨˜éŒ²(countID-countDel)
+int countId;//IDç®¡ç†
+int countDel;//å‰Šé™¤ã—ãŸIDã®ã‚«ã‚¦ãƒ³ãƒˆ
+int inputD;//å‰Šé™¤IDæ ¼ç´
 int num;
-char inputF[64];//ŒŸõIDŠi”[
-int i;//ƒ‹[ƒv—p
+char inputF[64];//æ¤œç´¢IDæ ¼ç´
+int i;//ãƒ«ãƒ¼ãƒ—ç”¨
 int j;
 char *moji_kari;
 
-//ŸRECORD@\‘¢‘Ì
+//â—†RECORDã€€æ§‹é€ ä½“
 typedef struct record{
     int id;
     char lname[64];
     char fname[64];
     char email[64];
-    struct record *next;//Ÿ‚Ìƒf[ƒ^
+    struct record *next;//æ¬¡ã®ãƒ‡ãƒ¼ã‚¿
 } RECORD;
 
-RECORD *head = NULL;//æ“ª
-RECORD *tail = NULL;//––”ö
+RECORD *head = NULL;//å…ˆé ­
+RECORD *tail = NULL;//æœ«å°¾
 RECORD *Node_Make(void);
 void ReadData(void);void WriteData(void);void Find(void);
 void Add(void);void Delete(void);
 void Sort(void);void Print(void);
 
 
-//ƒm[ƒhì¬
+//ãƒãƒ¼ãƒ‰ä½œæˆ
 RECORD *Node_Make(void){
-    RECORD *Node_New;//êŠ–¼
-    Node_New = (RECORD *)malloc(sizeof(RECORD));//ƒf[ƒ^Šm•Ûiƒ|ƒCƒ“ƒ^©‘Ì‚Ìj
+    RECORD *Node_New;//å ´æ‰€å
+    Node_New = (RECORD *)malloc(sizeof(RECORD));//ãƒ‡ãƒ¼ã‚¿ç¢ºä¿ï¼ˆãƒã‚¤ãƒ³ã‚¿è‡ªä½“ã®ï¼‰
     return Node_New;}
 
-//ŸReadData@“Ç‚İ‚İ
+//â—†ReadDataã€€èª­ã¿è¾¼ã¿
 void ReadData(void){
     FILE *fp;
     RECORD *Node_Read;
@@ -55,7 +55,7 @@ void ReadData(void){
     char *p;
  
 	fp = fopen(filename,"r");
-	if(fp==NULL){printf("ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñc");return;}
+	if(fp==NULL){printf("ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“â€¦");return;}
 
 	while((fgets(moji,sizeof(moji),fp))!=NULL){
         printf("%s", moji);
@@ -63,11 +63,11 @@ void ReadData(void){
 
         if(strcmp(moji,"--------------------------------------------\n")==0)continue;
 
-        if(i>=3){//ƒŒƒR[ƒh”‚Ìs‚Í–³‹
-            moji_kari = strtok(moji," ");//moji‚ğƒXƒy[ƒX‚²‚Æ‚É•ªŠ„
+        if(i>=3){//ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°ã®è¡Œã¯ç„¡è¦–
+            moji_kari = strtok(moji," ");//mojiã‚’ã‚¹ãƒšãƒ¼ã‚¹ã”ã¨ã«åˆ†å‰²
             strcpy(Node_Lname, moji_kari);
     
-            moji_kari=strtok(NULL," ");//NULL‚ªæ“ª‚É‚È‚Á‚Ä‚¢‚é
+            moji_kari=strtok(NULL," ");//NULLãŒå…ˆé ­ã«ãªã£ã¦ã„ã‚‹
             strcpy(Node_Fname, moji_kari);
 
             moji_kari=strtok(NULL," ");
@@ -81,18 +81,18 @@ void ReadData(void){
     read=1;
  
 	fclose(fp);
-    printf("“Ç‚İ‚İ‚Ü‚µ‚½\n");
+    printf("èª­ã¿è¾¼ã¿ã¾ã—ãŸ\n");
 	return;
 }
 
-//ŸWriteData@‘‚«‚İ
+//â—†WriteDataã€€æ›¸ãè¾¼ã¿
 void WriteData(void){
     FILE *fp;
     RECORD *Node_Write;
     fp = fopen("AddressList.txt","w");
-    if(fp == NULL){printf("–³Œø‚ÈƒRƒ}ƒ“ƒh\n");exit(1);}
+    if(fp == NULL){printf("ç„¡åŠ¹ãªã‚³ãƒãƒ³ãƒ‰\n");exit(1);}
 
-    if((head == NULL)&&(tail == NULL)){printf("ƒf[ƒ^‚È‚µ\n");return;}
+    if((head == NULL)&&(tail == NULL)){printf("ãƒ‡ãƒ¼ã‚¿ãªã—\n");return;}
 
     Node_Write = head;
     printf("--------------------------------------------\n");
@@ -112,80 +112,80 @@ void WriteData(void){
         fputs(" ",fp);
         fputs(Node_Write->email,fp);
         if (Node_Write->next != NULL){Node_Write = Node_Write->next;}
-        else{printf("‘‚«‚İ‚Ü‚µ‚½\n");break;}
+        else{printf("æ›¸ãè¾¼ã¿ã¾ã—ãŸ\n");break;}
     }
     fputs("\n--------------------------------------------\n",fp);
     fclose(fp);
 }
 
-//ŸAdd@’Ç‰Á
+//â—†Addã€€è¿½åŠ 
 void Add(void){
     RECORD *Node_New;
 
     Node_New = Node_Make();
     Node_Id = countId + 1;
-    //“ü—Í
+    //å…¥åŠ›
     Node_New->id = Node_Id;
 
-    //“Ç‚İ‚İˆ—
+    //èª­ã¿è¾¼ã¿å‡¦ç†
     if(read==0){
         strcpy(Node_New->lname, Node_Lname);
         strcpy(Node_New->fname, Node_Fname);
         strcpy(Node_New->email, Node_Email);}
     else{
-    printf("©F");scanf("%s", Node_Lname);strcpy(Node_New->lname, Node_Lname);
-    printf("–¼F");scanf("%s", Node_Fname);strcpy(Node_New->fname, Node_Fname);
-    printf("ƒ[ƒ‹ƒAƒhƒŒƒXF");scanf("%s", Node_Email);strcpy(Node_New->email, Node_Email);
-    printf("’Ç‰Á‚µ‚Ü‚µ‚½\n");}
+    printf("å§“ï¼š");scanf("%s", Node_Lname);strcpy(Node_New->lname, Node_Lname);
+    printf("åï¼š");scanf("%s", Node_Fname);strcpy(Node_New->fname, Node_Fname);
+    printf("ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼š");scanf("%s", Node_Email);strcpy(Node_New->email, Node_Email);
+    printf("è¿½åŠ ã—ã¾ã—ãŸ\n");}
     
 
-    //ˆ—
+    //å‡¦ç†
     if ((head == NULL)&&(tail == NULL)){
         head = Node_New;
         tail = Node_New;}
-    else{//‚ ‚é‚È‚çi1‚ÂˆÈãj
-        tail->next = Node_New;//––”öƒf[ƒ^‚ÌŒã‚ë‚ÉVƒm[ƒh
-        tail = Node_New;}//Vƒm[ƒh‚ª––”öƒf[ƒ^‚É‚È‚é
+    else{//ã‚ã‚‹ãªã‚‰ï¼ˆ1ã¤ä»¥ä¸Šï¼‰
+        tail->next = Node_New;//æœ«å°¾ãƒ‡ãƒ¼ã‚¿ã®å¾Œã‚ã«æ–°ãƒãƒ¼ãƒ‰
+        tail = Node_New;}//æ–°ãƒãƒ¼ãƒ‰ãŒæœ«å°¾ãƒ‡ãƒ¼ã‚¿ã«ãªã‚‹
         tail->next = NULL;
     countId = countId + 1;
     total = total + 1;}
 
-//ŸDelete@íœ
+//â—†Deleteã€€å‰Šé™¤
 void Delete(void){
     RECORD *Node_Delete;
     RECORD *kakunoD;
-    printf("íœ‚µ‚½‚¢ƒf[ƒ^‚ÌIDF");
+    printf("å‰Šé™¤ã—ãŸã„ãƒ‡ãƒ¼ã‚¿ã®IDï¼š");
     scanf("%d", &inputD);
-    if(inputD>countId){printf("‚È‚¢‚Å‚·B");return;}
+    if(inputD>countId){printf("ãªã„ã§ã™ã€‚");return;}
     Node_Delete = head;
     kakunoD = Node_Delete;
 
-    for (i=1; Node_Delete->id!=inputD; i++){//íœID‚Ü‚ÅˆÚ“®‚·‚é
-        kakunoD = Node_Delete;//è‘O‚Ìî•ñ‚ğ‹L˜^
+    for (i=1; Node_Delete->id!=inputD; i++){//å‰Šé™¤IDã¾ã§ç§»å‹•ã™ã‚‹
+        kakunoD = Node_Delete;//æ‰‹å‰ã®æƒ…å ±ã‚’è¨˜éŒ²
         Node_Delete = Node_Delete->next;}
 
-    if(Node_Delete!=head){kakunoD->next = Node_Delete->next;}//íœ‘ÎÛ‚Ì‘OkakunoD‚Æíœ‘ÎÛ‚ÌŸ‚ğ‚Â‚È‚°‚é
-    if((Node_Delete!=head)&&(Node_Delete==tail)){tail = kakunoD;}//tail‚ğÁ‚·ê‡A‘O‚ğtail‚É
+    if(Node_Delete!=head){kakunoD->next = Node_Delete->next;}//å‰Šé™¤å¯¾è±¡ã®å‰kakunoDã¨å‰Šé™¤å¯¾è±¡ã®æ¬¡ã‚’ã¤ãªã’ã‚‹
+    if((Node_Delete!=head)&&(Node_Delete==tail)){tail = kakunoD;}//tailã‚’æ¶ˆã™å ´åˆã€å‰ã‚’tailã«
 
-    if((Node_Delete==head)&&(Node_Delete==tail)){tail = Node_Delete->next;}//tail‚ğÁ‚·ê‡AŸ‚ğtail‚É
-    if(Node_Delete==head){head = Node_Delete->next;}//head‚ğÁ‚·ê‡AŸ‚ğhead‚É
+    if((Node_Delete==head)&&(Node_Delete==tail)){tail = Node_Delete->next;}//tailã‚’æ¶ˆã™å ´åˆã€æ¬¡ã‚’tailã«
+    if(Node_Delete==head){head = Node_Delete->next;}//headã‚’æ¶ˆã™å ´åˆã€æ¬¡ã‚’headã«
 
     free(Node_Delete);
 
-    printf("íœ‚µ‚Ü‚µ‚½\n");
-    countDel = countDel + 1;//Œ¸‚Á‚½•ª‚Ìˆ—‚ğŒ¸‚ç‚·(Á‚µ‚½ƒf[ƒ^”)
+    printf("å‰Šé™¤ã—ã¾ã—ãŸ\n");
+    countDel = countDel + 1;//æ¸›ã£ãŸåˆ†ã®å‡¦ç†ã‚’æ¸›ã‚‰ã™(æ¶ˆã—ãŸãƒ‡ãƒ¼ã‚¿æ•°)
     total = total - 1;}
 
-//ŸFind@ŒŸõ
+//â—†Findã€€æ¤œç´¢
 void Find(void){
     RECORD *Node_Find;
     Node_Find = head;
     i=0;
-    printf("1F©@2F–¼@3Fƒ[ƒ‹ƒAƒhƒŒƒX\n");
-    printf("ŒŸõ‘ÎÛF");
+    printf("1ï¼šå§“ã€€2ï¼šåã€€3ï¼šãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹\n");
+    printf("æ¤œç´¢å¯¾è±¡ï¼š");
     scanf("%d", &num);
 
-    printf("ŒŸõ’PŒêF");
+    printf("æ¤œç´¢å˜èªï¼š");
     scanf("%s", inputF);
 
     while(i<countId){
@@ -199,16 +199,16 @@ void Find(void){
         if(find_ok == 1){
             printf("--------------------------------------------\n");
             printf("%d\n", Node_Find->id);
-            printf("%s@", Node_Find->lname);
-            printf("%s@", Node_Find->fname);
+            printf("%sã€€", Node_Find->lname);
+            printf("%sã€€", Node_Find->fname);
             printf("%s\n", Node_Find->email);
             printf("--------------------------------------------\n");}
             if(Node_Find->next!=NULL){Node_Find=Node_Find->next;}
             i++;}
-    printf("ŒŸõ‚µ‚Ü‚µ‚½\n");
+    printf("æ¤œç´¢ã—ã¾ã—ãŸ\n");
 }
 
-//ŸSort@®—ñ
+//â—†Sortã€€æ•´åˆ—
 void Sort(void){
     RECORD *Prev_L,*Node_Sort_L,*Next_L;
     RECORD *Prev_R,*Node_Sort_R,*Next_R;
@@ -223,10 +223,10 @@ void Sort(void){
     Prev_L = NULL;
     Prev_R = Sort_L;
 
-    printf("1F©@2F–¼@3Fƒ[ƒ‹ƒAƒhƒŒƒX\n");
-    printf("®—ñ‘ÎÛF");
+    printf("1ï¼šå§“ã€€2ï¼šåã€€3ï¼šãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹\n");
+    printf("æ•´åˆ—å¯¾è±¡ï¼š");
     scanf("%d", &num);
-    printf("1F¸‡@2F~‡@¨@");
+    printf("1ï¼šæ˜‡é †ã€€2ï¼šé™é †ã€€â†’ã€€");
     scanf("%d", &sort_ok);
     
     if(Sort_L->next==NULL)return;
@@ -243,7 +243,7 @@ void Sort(void){
             if((sort_data!=0)||j==64)break;
             j++;}
             
-            //L‚ª‘å‚«‚¢‚Æ³‚Ì’l
+            //LãŒå¤§ãã„ã¨æ­£ã®å€¤
             if((sort_ok==1&&sort_data>0)||(sort_ok==2&&sort_data<0)){
                 Next_L = Sort_L->next;
                 Next_R = Sort_R->next;
@@ -251,40 +251,40 @@ void Sort(void){
                 if(Prev_R!=Sort_L)Prev_R->next = Sort_L;//Rp-L
                 Node_Sort_R->next = Next_R;//L-Rn
 
-                //—×ÚEL‚ÌŸ‚ªR‚Ìê‡ R-L
+                //éš£æ¥ãƒ»Lã®æ¬¡ãŒRã®å ´åˆ R-L
                 if(Next_L == Sort_R){Node_Sort_L->next = Sort_L;}
-                //—×Ú‚µ‚Ä‚¢‚È‚¢ê‡ R-Ln
+                //éš£æ¥ã—ã¦ã„ãªã„å ´åˆ R-Ln
                 else{Node_Sort_L->next = Next_L;}
 
-                //ŒğŠ·Œ³L‚ªhead‚©‚Ç‚¤‚©
+                //äº¤æ›å…ƒLãŒheadã‹ã©ã†ã‹
                 if(Sort_L==head){head = Node_Sort_L;}
-                //ŒğŠ·æR‚ªtail‚©‚Ç‚¤‚©
+                //äº¤æ›å…ˆRãŒtailã‹ã©ã†ã‹
                 if(Sort_R==tail){tail = Node_Sort_R;}
 
                 Sort_L = Node_Sort_L;
                 Sort_R = Node_Sort_R;
             }
-        //tail‚Ü‚Å‚¢‚Á‚½ê‡i–¢ŒğŠ·orŒğŠ·Ïj
+        //tailã¾ã§ã„ã£ãŸå ´åˆï¼ˆæœªäº¤æ›oräº¤æ›æ¸ˆï¼‰
         if((Sort_R==tail)||(Sort_L==tail))break;
 
-        //R‚Ì‘Oƒm[ƒh‚ğ‹L‰¯iR‚ª––”ö‚¶‚á‚È‚¯‚ê‚Îj
+        //Rã®å‰ãƒãƒ¼ãƒ‰ã‚’è¨˜æ†¶ï¼ˆRãŒæœ«å°¾ã§ãªã‘ã‚Œã°ï¼‰
         Prev_R = Sort_R;
         Sort_R=Sort_R->next;}
     if(i==total-2)break;
     Prev_L = Sort_L;
     Sort_L=Sort_L->next;
 
-    Prev_R = Sort_L;//‰‚ßAR‚Ì‘O‚ÍL
-    Sort_R = Sort_L->next;//R‚ÍL‚ÌŸ
+    Prev_R = Sort_L;//åˆã‚ã€Rã®å‰ã¯L
+    Sort_R = Sort_L->next;//Rã¯Lã®æ¬¡
     i++;}
-    printf("®—ñ‚µ‚Ü‚µ‚½\n");
+    printf("æ•´åˆ—ã—ã¾ã—ãŸ\n");
 }
 
-//ŸPrint@•\¦*ƒeƒXƒg—p
+//â—†Printã€€è¡¨ç¤º*ãƒ†ã‚¹ãƒˆç”¨
 void Print(void){
     RECORD *Node_Write;
     i=0;
-    if((head == NULL)&&(tail == NULL)){printf("ƒf[ƒ^‚È‚µ\n");return;}
+    if((head == NULL)&&(tail == NULL)){printf("ãƒ‡ãƒ¼ã‚¿ãªã—\n");return;}
     Node_Write = head;
     printf("--------------------------------------------\n");
     while(1){
@@ -296,19 +296,19 @@ void Print(void){
         printf("--------------------------------------------\n");
         if(i==15)break;
         if(Node_Write->next != NULL){Node_Write = Node_Write->next;}
-        else{printf("Š®—¹I\n");break;}
+        else{printf("å®Œäº†ï¼\n");break;}
     }
 }
 
-//ŸƒƒCƒ“
+//â—†ãƒ¡ã‚¤ãƒ³
 int main(void){
     int input;
 
     ReadData();
 
     while (1){
-        printf("1:’Ç‰Á@2:íœ@3:ŒŸõ@4:®—ñ@5:•Û‘¶‚µ‚ÄI—¹\n");
-        printf("“ü—Í:");
+        printf("1:è¿½åŠ ã€€2:å‰Šé™¤ã€€3:æ¤œç´¢ã€€4:æ•´åˆ—ã€€5:ä¿å­˜ã—ã¦çµ‚äº†\n");
+        printf("å…¥åŠ›:");
         scanf("%d", &input);
         switch (input){
             case 1:Add();break;
@@ -317,6 +317,6 @@ int main(void){
             case 4:Sort();break;
             case 5:WriteData();break;
             case 6:Print();break;
-            default:printf("–³Œøc\n");break;}
+            default:printf("ç„¡åŠ¹â€¦\n");break;}
         printf("\n");}
     return 0;}
